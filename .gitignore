@@ -1,0 +1,19 @@
+# Build
+build/
+*.o
+*.out
+
+# Libraries
+*.so
+*.dll
+*.a
+
+# OpenNI SDK téléchargé
+OpenNI_2.3.0.86_*/
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.log
+*~
