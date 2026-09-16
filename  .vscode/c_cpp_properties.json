@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Raspberry Pi",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/OpenNI_2.3.0.86_202210111155_4c8f5aa4_beta6_a311d/sdk/Include",
+                "/usr/include/opencv4"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-arm64"
+        }
+    ],
+    "version": 4
+}
