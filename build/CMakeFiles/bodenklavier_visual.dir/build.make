@@ -142,10 +142,24 @@ CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emmanuel/bodenklavier/src/audio/AudioEngine.cpp -o CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.s
 
+CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o: CMakeFiles/bodenklavier_visual.dir/flags.make
+CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o: /home/emmanuel/bodenklavier/src/piano/NoteMapper.cpp
+CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o: CMakeFiles/bodenklavier_visual.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emmanuel/bodenklavier/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o -MF CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o.d -o CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o -c /home/emmanuel/bodenklavier/src/piano/NoteMapper.cpp
+
+CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emmanuel/bodenklavier/src/piano/NoteMapper.cpp > CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.i
+
+CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emmanuel/bodenklavier/src/piano/NoteMapper.cpp -o CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.s
+
 CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o: CMakeFiles/bodenklavier_visual.dir/flags.make
 CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o: /home/emmanuel/bodenklavier/src/processing/TouchDetector.cpp
 CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o: CMakeFiles/bodenklavier_visual.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emmanuel/bodenklavier/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emmanuel/bodenklavier/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o -MF CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o.d -o CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o -c /home/emmanuel/bodenklavier/src/processing/TouchDetector.cpp
 
 CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.i: cmake_force
@@ -156,6 +170,20 @@ CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.s: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emmanuel/bodenklavier/src/processing/TouchDetector.cpp -o CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.s
 
+CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o: CMakeFiles/bodenklavier_visual.dir/flags.make
+CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o: /home/emmanuel/bodenklavier/src/processing/ConflictResolver.cpp
+CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o: CMakeFiles/bodenklavier_visual.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emmanuel/bodenklavier/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o -MF CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o.d -o CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o -c /home/emmanuel/bodenklavier/src/processing/ConflictResolver.cpp
+
+CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emmanuel/bodenklavier/src/processing/ConflictResolver.cpp > CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.i
+
+CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emmanuel/bodenklavier/src/processing/ConflictResolver.cpp -o CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.s
+
 # Object files for target bodenklavier_visual
 bodenklavier_visual_OBJECTS = \
 "CMakeFiles/bodenklavier_visual.dir/src_cpp/bodenklavier_visual.cpp.o" \
@@ -163,7 +191,9 @@ bodenklavier_visual_OBJECTS = \
 "CMakeFiles/bodenklavier_visual.dir/src/piano/PianoLayout.cpp.o" \
 "CMakeFiles/bodenklavier_visual.dir/src/piano/KeyStateManager.cpp.o" \
 "CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.o" \
-"CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o"
+"CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o" \
+"CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o" \
+"CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o"
 
 # External object files for target bodenklavier_visual
 bodenklavier_visual_EXTERNAL_OBJECTS =
@@ -173,7 +203,9 @@ bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/piano/MatCalibration
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/piano/PianoLayout.cpp.o
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/piano/KeyStateManager.cpp.o
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.o
+bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o
+bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/build.make
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/compiler_depend.ts
 bodenklavier_visual: /usr/lib/aarch64-linux-gnu/libopencv_stitching.so.4.10.0
@@ -232,7 +264,7 @@ bodenklavier_visual: /usr/lib/aarch64-linux-gnu/libopencv_photo.so.4.10.0
 bodenklavier_visual: /usr/lib/aarch64-linux-gnu/libopencv_imgproc.so.4.10.0
 bodenklavier_visual: /usr/lib/aarch64-linux-gnu/libopencv_core.so.4.10.0
 bodenklavier_visual: CMakeFiles/bodenklavier_visual.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/emmanuel/bodenklavier/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable bodenklavier_visual"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/emmanuel/bodenklavier/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable bodenklavier_visual"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bodenklavier_visual.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

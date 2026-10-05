@@ -6,12 +6,14 @@
 
 #include "PianoLayout.h"
 
+
 enum class KeyEventType
 {
     PRESS,
     HOLD,
     RELEASE
 };
+
 
 struct KeyEvent
 {
@@ -20,9 +22,11 @@ struct KeyEvent
     KeyEventType type;
 };
 
+
 class KeyStateManager
 {
 public:
+
     explicit KeyStateManager(
         const std::vector<PianoKey>& keys
     );
@@ -33,9 +37,26 @@ public:
 
     void reset();
 
+
 private:
+
     std::vector<PianoKey> keys;
-    std::vector<bool> previousState;
+
+    // Etat stable confirme
+    std::vector<bool> stableState;
+
+    // Nombre de frames consecutives detectees
+    std::vector<int> detectedFrames;
+
+    // Nombre de frames consecutives non detectees
+    std::vector<int> missingFrames;
+
+    // Nombre de frames necessaires avant PRESS
+    int pressConfirmationFrames;
+
+    // Nombre de frames necessaires avant RELEASE
+    int releaseConfirmationFrames;
 };
+
 
 #endif

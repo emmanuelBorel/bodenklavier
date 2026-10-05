@@ -214,6 +214,30 @@ src/piano/MatCalibration.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/piano/MatCalibration.cpp.s
 .PHONY : src/piano/MatCalibration.cpp.s
 
+src/piano/NoteMapper.o: src/piano/NoteMapper.cpp.o
+.PHONY : src/piano/NoteMapper.o
+
+# target to build an object file
+src/piano/NoteMapper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o
+.PHONY : src/piano/NoteMapper.cpp.o
+
+src/piano/NoteMapper.i: src/piano/NoteMapper.cpp.i
+.PHONY : src/piano/NoteMapper.i
+
+# target to preprocess a source file
+src/piano/NoteMapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.i
+.PHONY : src/piano/NoteMapper.cpp.i
+
+src/piano/NoteMapper.s: src/piano/NoteMapper.cpp.s
+.PHONY : src/piano/NoteMapper.s
+
+# target to generate assembly for a file
+src/piano/NoteMapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.s
+.PHONY : src/piano/NoteMapper.cpp.s
+
 src/piano/PianoLayout.o: src/piano/PianoLayout.cpp.o
 .PHONY : src/piano/PianoLayout.o
 
@@ -237,6 +261,30 @@ src/piano/PianoLayout.s: src/piano/PianoLayout.cpp.s
 src/piano/PianoLayout.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/piano/PianoLayout.cpp.s
 .PHONY : src/piano/PianoLayout.cpp.s
+
+src/processing/ConflictResolver.o: src/processing/ConflictResolver.cpp.o
+.PHONY : src/processing/ConflictResolver.o
+
+# target to build an object file
+src/processing/ConflictResolver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o
+.PHONY : src/processing/ConflictResolver.cpp.o
+
+src/processing/ConflictResolver.i: src/processing/ConflictResolver.cpp.i
+.PHONY : src/processing/ConflictResolver.i
+
+# target to preprocess a source file
+src/processing/ConflictResolver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.i
+.PHONY : src/processing/ConflictResolver.cpp.i
+
+src/processing/ConflictResolver.s: src/processing/ConflictResolver.cpp.s
+.PHONY : src/processing/ConflictResolver.s
+
+# target to generate assembly for a file
+src/processing/ConflictResolver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bodenklavier_visual.dir/build.make CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.s
+.PHONY : src/processing/ConflictResolver.cpp.s
 
 src/processing/TouchDetector.o: src/processing/TouchDetector.cpp.o
 .PHONY : src/processing/TouchDetector.o
@@ -329,9 +377,15 @@ help:
 	@echo "... src/piano/MatCalibration.o"
 	@echo "... src/piano/MatCalibration.i"
 	@echo "... src/piano/MatCalibration.s"
+	@echo "... src/piano/NoteMapper.o"
+	@echo "... src/piano/NoteMapper.i"
+	@echo "... src/piano/NoteMapper.s"
 	@echo "... src/piano/PianoLayout.o"
 	@echo "... src/piano/PianoLayout.i"
 	@echo "... src/piano/PianoLayout.s"
+	@echo "... src/processing/ConflictResolver.o"
+	@echo "... src/processing/ConflictResolver.i"
+	@echo "... src/processing/ConflictResolver.s"
 	@echo "... src/processing/TouchDetector.o"
 	@echo "... src/processing/TouchDetector.i"
 	@echo "... src/processing/TouchDetector.s"

@@ -7,7 +7,9 @@ bodenklavier_visual: \
   CMakeFiles/bodenklavier_visual.dir/src/piano/PianoLayout.cpp.o \
   CMakeFiles/bodenklavier_visual.dir/src/piano/KeyStateManager.cpp.o \
   CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.o \
+  CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o \
   CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o \
+  CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o \
   /home/emmanuel/bodenklavier/OpenNI_2.3.0.86_202210111155_4c8f5aa4_beta6_a311d/sdk/libs/libOpenNI2.so \
   /usr/lib/aarch64-linux-gnu/libopencv_stitching.so.4.10.0 \
   /usr/lib/aarch64-linux-gnu/libopencv_alphamat.so.4.10.0 \
@@ -186,7 +188,11 @@ CMakeFiles/bodenklavier_visual.dir/src/piano/KeyStateManager.cpp.o:
 
 CMakeFiles/bodenklavier_visual.dir/src/audio/AudioEngine.cpp.o:
 
+CMakeFiles/bodenklavier_visual.dir/src/piano/NoteMapper.cpp.o:
+
 CMakeFiles/bodenklavier_visual.dir/src/processing/TouchDetector.cpp.o:
+
+CMakeFiles/bodenklavier_visual.dir/src/processing/ConflictResolver.cpp.o:
 
 /home/emmanuel/bodenklavier/OpenNI_2.3.0.86_202210111155_4c8f5aa4_beta6_a311d/sdk/libs/libOpenNI2.so:
 

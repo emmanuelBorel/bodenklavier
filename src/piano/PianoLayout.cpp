@@ -78,11 +78,11 @@ void PianoLayout::generateBlackKeys()
     };
 
    const vector<string> blackNotes = {
-    "B1", "B2", "B3",
-    "B4", "B5",
-    "B6", "B7", "B8",
-    "B9", "B10"
-    };
+    "BLACK_01", "BLACK_02", "BLACK_03",
+    "BLACK_04", "BLACK_05",
+    "BLACK_06", "BLACK_07", "BLACK_08",
+    "BLACK_09", "BLACK_10"
+};
     
     for (size_t i = 0; i < blackPositions.size(); ++i)
     {

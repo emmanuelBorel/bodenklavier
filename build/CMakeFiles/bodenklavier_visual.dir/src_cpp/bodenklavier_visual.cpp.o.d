@@ -452,4 +452,6 @@ CMakeFiles/bodenklavier_visual.dir/src_cpp/bodenklavier_visual.cpp.o: \
  /usr/include/SDL2/SDL_render.h /usr/include/SDL2/SDL_shape.h \
  /usr/include/SDL2/SDL_system.h /usr/include/SDL2/SDL_timer.h \
  /usr/include/SDL2/SDL_version.h /usr/include/SDL2/SDL_locale.h \
- /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_mixer.h
+ /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_mixer.h \
+ /home/emmanuel/bodenklavier/include/ConflictResolver.h \
+ /home/emmanuel/bodenklavier/include/NoteMapper.h

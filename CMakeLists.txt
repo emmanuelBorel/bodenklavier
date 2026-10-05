@@ -45,8 +45,10 @@ add_executable(
     src/piano/PianoLayout.cpp
     src/piano/KeyStateManager.cpp
     src/audio/AudioEngine.cpp
+    src/piano/NoteMapper.cpp
 
     src/processing/TouchDetector.cpp
+    src/processing/ConflictResolver.cpp
 )
 
 target_include_directories(

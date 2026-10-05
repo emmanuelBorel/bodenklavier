@@ -11,6 +11,8 @@
 #include "TouchDetector.h"
 #include "KeyStateManager.h"
 #include "AudioEngine.h"
+#include "ConflictResolver.h"
+#include "NoteMapper.h"
 
 using namespace openni;
 using namespace std;
@@ -23,6 +25,8 @@ using namespace cv;
 
 MatCalibration calibration;
 TouchDetector touchDetector;
+ConflictResolver conflictResolver;
+NoteMapper noteMapper;
 
 
 // ============================================================
@@ -380,25 +384,74 @@ int main()
         nullptr;
 
 
-    AudioEngine audioEngine;
+   AudioEngine audioEngine;
 
-    if (
-        !audioEngine.initialize(
-            "../media/sounds"
-        )
+if (
+    !audioEngine.initialize(
+        "../media/sounds"
+    )
+)
+{
+    cerr
+        << "Audio non disponible."
+        << endl;
+}
+else
+{
+    const vector<string> whiteAudioNotes = {
+        "C4",
+        "D4",
+        "E4",
+        "F4",
+        "G4",
+        "A4",
+        "B4",
+
+        "C5",
+        "D5",
+        "E5",
+        "F5",
+        "G5",
+        "A5",
+        "B5"
+    };
+
+    for (
+        const string& note :
+        whiteAudioNotes
     )
     {
-        cerr
-            << "Audio non disponible."
-            << endl;
-    }
-    else
-    {
         audioEngine.loadSound(
-            "C4",
-            "C4.wav"
+            note,
+            note + ".wav"
         );
     }
+
+    const vector<string> blackAudioNotes = {
+        "Cs4",
+        "Ds4",
+        "Fs4",
+        "Gs4",
+        "As4",
+
+        "Cs5",
+        "Ds5",
+        "Fs5",
+        "Gs5",
+        "As5"
+    };
+
+    for (
+        const string& note :
+        blackAudioNotes
+    )
+    {
+        audioEngine.loadSound(
+            note,
+            note + ".wav"
+        );
+    }
+}
 
 
     while (true)
@@ -826,20 +879,31 @@ int main()
                         // DETECTION DES TOUCHES
                         // ====================================
 
-                        vector<int> touchedKeys;
+                        vector<int> detectedKeys;
 
 
                         if (
                             touchDetector.hasReference()
                         )
                         {
-                            touchedKeys =
+                            detectedKeys =
                                 touchDetector
                                 .detectTouchedKeys(
                                     rectifiedDepth,
                                     pianoKeys
                                 );
                         }
+
+
+                        // ====================================
+                        // RESOLUTION DES CONFLITS SPATIAUX
+                        // ====================================
+
+                        vector<int> touchedKeys =
+                            conflictResolver.resolve(
+                                detectedKeys,
+                                pianoKeys
+                            );
 
 
                         // ====================================
@@ -872,9 +936,13 @@ int main()
                                     << "PRESS : "
                                     << event.note
                                     << endl;
-
-                                audioEngine.play(
+                                //convertir l'identifiant physique en note musicale
+                                string musicalNote =
+                                noteMapper.toMusicalNote(
                                     event.note
+                                );
+                                audioEngine.play(
+                                    musicalNote
                                 );
                             }
                             else if (
@@ -886,9 +954,14 @@ int main()
                                     << "RELEASE : "
                                     << event.note
                                     << endl;
+                                //utlisliser la meme correspondance pour arreter le son
+                                string musicalNote = 
+                                noteMapper.toMusicalNote(
+                                    event.note
+                                );
 
                                 audioEngine.stop(
-                                    event.note
+                                    musicalNote
                                 );
                             }
                         }
