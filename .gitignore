@@ -17,3 +17,10 @@ OpenNI_2.3.0.86_*/
 # Temporary files
 *.log
 *~
+
+#Generated / downloaded piano audio
+media/piano_samples/
+media/sounds_piano/
+
+# Build artifacts
+build/

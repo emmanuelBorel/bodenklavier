@@ -388,7 +388,7 @@ int main()
 
 if (
     !audioEngine.initialize(
-        "../media/sounds"
+        "media/sounds_piano"
     )
 )
 {

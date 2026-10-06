@@ -1,4 +1,0 @@
-/home/emmanuel/bodenklavier/build/CMakeFiles/bodenklavier_visual.dir
-/home/emmanuel/bodenklavier/build/CMakeFiles/bodenklavier_depth.dir
-/home/emmanuel/bodenklavier/build/CMakeFiles/edit_cache.dir
-/home/emmanuel/bodenklavier/build/CMakeFiles/rebuild_cache.dir
