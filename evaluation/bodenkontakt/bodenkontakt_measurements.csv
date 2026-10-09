@@ -1,0 +1,6 @@
+state,valid_pixels,changed_pixels,changed_ratio,mean_difference_mm,median_difference_mm,min_difference_mm,max_difference_mm
+EMPTY,2577,0,0,4.20434,3,1,30
+HOVER_20,2527,389,0.153937,70.3356,13,1,519
+HOVER_10,2565,552,0.215205,80.5708,19,1,413
+HOVER_5,2573,695,0.270113,76.9401,24,1,373
+CONTACT,2573,690,0.268169,56.5463,17,1,289

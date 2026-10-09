@@ -1,0 +1,14 @@
+%YAML:1.0
+---
+number_of_frames: 30
+change_threshold_mm: 30
+max_trials: 10
+roi_rgb_x: 301
+roi_rgb_y: 296
+roi_rgb_w: 22
+roi_rgb_h: 25
+rgb_width: 640
+rgb_height: 480
+depth_width: 640
+depth_height: 480
+registration: DEPTH_TO_COLOR_REQUESTED
