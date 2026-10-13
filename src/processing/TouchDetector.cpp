@@ -33,6 +33,11 @@ bool TouchDetector::hasReference() const
     return !referenceDepth.empty();
 }
 
+void TouchDetector::clearReference()
+{
+    referenceDepth.release();
+}
+
 
 vector<int> TouchDetector::detectTouchedKeys(
     const Mat& currentDepth,

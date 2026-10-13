@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <unistd.h>
+#include <chrono>
 
 #include "MatCalibration.h"
 #include "PianoLayout.h"
@@ -13,6 +14,7 @@
 #include "AudioEngine.h"
 #include "ConflictResolver.h"
 #include "NoteMapper.h"
+#include "ArucoCalibration.h"
 
 using namespace openni;
 using namespace std;
@@ -452,7 +454,16 @@ else
         );
     }
 }
+    ArucoCalibration arucoCalibration(
+        "tests/aruco/aruco_reference.yml",
+        30
+    );
 
+    bool arucoAvailable = arucoCalibration.loadReference();
+
+    bool manualCalibrationMode = !arucoAvailable;
+
+    auto calibrationStart = std::chrono::steady_clock::now();
 
     while (true)
     {
@@ -649,6 +660,71 @@ else
 
                 Mat cleanBgr =
                     bgr.clone();
+
+                // ============================================
+                // CALIBRATION AUTOMATIQUE ARUCO
+                // ============================================
+
+                if (arucoAvailable &&
+                    !manualCalibrationMode &&
+                    !calibration.isCalibrated())
+                {
+                    if (arucoCalibration.processFrame(cleanBgr))
+                    {
+                        const auto detectedCorners =
+                            arucoCalibration.getCorners();
+
+                        if (detectedCorners.size() == 4)
+                        {
+                            calibration.reset();
+
+                            for (const auto& corner : detectedCorners)
+                            {
+                                calibration.addCorner(corner);
+                            }
+
+                            auto calibrationEnd = std::chrono::steady_clock::now();
+
+                            double calibrationDuration =
+                                std::chrono::duration<double>(
+                                    calibrationEnd - calibrationStart
+                                ).count();
+
+                            cout << "====================================" << endl;
+                            cout << "CALIBRATION ARUCO TERMINEE" << endl;
+                            cout << "Duree : " << calibrationDuration << " secondes" << endl;
+                            int total = arucoCalibration.getTotalFrames();
+                            int incomplete = arucoCalibration.getIncompleteFrames();
+
+                            double detectionRate = total > 0
+                                ? 100.0 * (total - incomplete) / total
+                                : 0.0;
+
+                            cout << "Images analysees : " << total << endl;
+                            cout << "Images incompletes : " << incomplete << endl;
+                            cout << "Taux d'images valides : "
+                                 << detectionRate << " %" << endl;
+
+                            auto misses = arucoCalibration.getMarkerMisses();
+
+                            cout << "Marqueurs absents par image :" << endl;
+
+                            for (int id = 0; id < 4; ++id)
+                            {
+                                cout << "ArUco ID " << id
+                                     << " : " << misses[id]
+                                     << " images" << endl;
+                            }
+                            cout << "====================================" << endl;
+
+                            cout << "Calibration automatique ArUco OK."
+                                << endl;
+
+                            cout << "Tapis rectifie automatiquement."
+                                << endl;
+                        }
+                    }
+                }
 
 
                 // ============================================
@@ -878,6 +954,7 @@ else
                         // ====================================
                         // DETECTION DES TOUCHES
                         // ====================================
+                        auto detectionStart = std::chrono::steady_clock::now();
 
                         vector<int> detectedKeys;
 
@@ -941,9 +1018,18 @@ else
                                 noteMapper.toMusicalNote(
                                     event.note
                                 );
-                                audioEngine.play(
-                                    musicalNote
-                                );
+                                auto audioCallTime = std::chrono::steady_clock::now();
+
+                                double latencyMs =
+                                    std::chrono::duration<double, std::milli>(
+                                        audioCallTime - detectionStart
+                                    ).count();
+
+                                cout << "[T5] Note : " << musicalNote
+                                    << " | Latence traitement : "
+                                    << latencyMs << " ms" << endl;
+
+                                audioEngine.play(musicalNote);
                             }
                             else if (
                                 event.type ==
@@ -1161,18 +1247,87 @@ else
             break;
         }
 
+        // ============================================
+        // A = RECALIBRATION AUTOMATIQUE ARUCO
+        // ============================================
+
+        if (c == 'a' || c == 'A')
+        {
+            if (!arucoAvailable)
+            {
+                cout << "Reference ArUco indisponible." << endl;
+            }
+            else
+            {
+                calibration.reset();
+                arucoCalibration.reset();
+                calibrationStart = std::chrono::steady_clock::now();
+
+                manualCalibrationMode = false;
+
+                touchDetector.clearReference();
+                latestRectifiedDepth.release();
+
+                if (keyStateManager != nullptr)
+                {
+                    delete keyStateManager;
+                    keyStateManager = nullptr;
+                }
+
+                destroyWindow(rectifiedWindow);
+
+                cout << "Recalibration automatique ArUco..."
+                    << endl;
+                cout << "Attente de 30 images valides."
+                    << endl;
+            }
+        }
+
+        // ============================================
+        // M = CALIBRATION MANUELLE
+        // ============================================
+
+        if (c == 'm' || c == 'M')
+        {
+            manualCalibrationMode = true;
+
+            calibration.reset();
+            arucoCalibration.reset();
+
+            touchDetector.clearReference();
+            latestRectifiedDepth.release();
+
+            if (keyStateManager != nullptr)
+            {
+                delete keyStateManager;
+                keyStateManager = nullptr;
+            }
+
+            destroyWindow(rectifiedWindow);
+
+            cout << "Mode calibration manuelle active."
+                << endl;
+
+            cout << "Clique sur les 4 coins du tapis."
+                << endl;
+        }
+
 
         // ====================================================
         // R = RESET CALIBRATION
         // ====================================================
 
         if (
-            c == 'r'
-            ||
-            c == 'R'
-        )
+            c == 'r'|| c == 'R')
         {
             calibration.reset();
+            arucoCalibration.reset();
+
+            //Chono neu starten
+            calibrationStart = std::chrono::steady_clock::now();
+            
+            touchDetector.clearReference();
+            manualCalibrationMode = ! arucoAvailable;
 
 
             if (keyStateManager != nullptr)
@@ -1269,7 +1424,7 @@ else
         // ====================================================
 
         usleep(
-            30000
+            5000
         );
     }
 

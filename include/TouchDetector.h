@@ -18,6 +18,8 @@ public:
 
     bool hasReference() const;
 
+    void clearReference();
+
     std::vector<int> detectTouchedKeys(
         const cv::Mat& currentDepth,
         const std::vector<PianoKey>& keys

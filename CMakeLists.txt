@@ -46,6 +46,7 @@ add_executable(
     src/piano/KeyStateManager.cpp
     src/audio/AudioEngine.cpp
     src/piano/NoteMapper.cpp
+    src/piano/ArucoCalibration.cpp
 
     src/processing/TouchDetector.cpp
     src/processing/ConflictResolver.cpp
@@ -123,6 +124,50 @@ target_include_directories(
 target_link_libraries(
     aruco_test
     PRIVATE
+    OpenNI2
+    ${OpenCV_LIBS}
+)
+
+# ============================================================
+# ArUco geometric calibration
+# ============================================================
+
+add_executable(
+    aruco_calibration
+    tests/aruco/aruco_calibration.cpp
+)
+
+target_link_libraries(
+    aruco_calibration
+    PRIVATE
+    OpenNI2
+    ${OpenCV_LIBS}
+)
+
+# ============================================
+# Test de calibration automatique ArUco
+# ============================================
+
+add_executable(aruco_auto_test
+    tests/aruco/aruco_auto_test.cpp
+)
+
+target_link_libraries(aruco_auto_test
+    PRIVATE
+    OpenNI2
+    ${OpenCV_LIBS}
+)
+
+add_executable(aruco_module_test
+    tests/aruco/aruco_module_test.cpp
+    src/piano/ArucoCalibration.cpp
+)
+
+target_include_directories(aruco_module_test PRIVATE
+    include
+)
+
+target_link_libraries(aruco_module_test PRIVATE
     OpenNI2
     ${OpenCV_LIBS}
 )
