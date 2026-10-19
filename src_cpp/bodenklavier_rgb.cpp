@@ -16,6 +16,102 @@
 #include "PianoLayout.h"
 #include "ConflictResolver.h"
 #include "KeyStateManager.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include <map>
+#include <memory>
+#include <cstdint>
+
+
+// Sons de demonstration produits en memoire. Aucun fichier WAV externe requis.
+// Les touches BLACK_XX sont associees dans l'ordre aux demi-tons classiques.
+class RgbDemoAudio {
+public:
+    bool init(const std::vector<PianoKey>& keys) {
+        if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
+            std::cerr << "SDL audio: " << SDL_GetError() << "\n";
+            return false;
+        }
+        if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) < 0) {
+            std::cerr << "SDL_mixer: " << Mix_GetError() << "\n";
+            SDL_QuitSubSystem(SDL_INIT_AUDIO);
+            return false;
+        }
+        initialized_ = true;
+        Mix_AllocateChannels(32);
+        for (const auto& key : keys) {
+            const int midi = noteToMidi(key.note);
+            if (midi < 0) {
+                std::cerr << "Note audio inconnue: " << key.note << "\n";
+                continue;
+            }
+            auto pcm = makeTone(midi);
+            // Mix_QuickLoad_RAW emprunte la memoire : garder les donnees vivantes.
+            auto& owned = buffers_[key.note];
+            owned = std::move(pcm);
+            Mix_Chunk* chunk = Mix_QuickLoad_RAW(
+                reinterpret_cast<Uint8*>(owned.data()),
+                static_cast<Uint32>(owned.size() * sizeof(int16_t)));
+            if (chunk) chunks_[key.note] = chunk;
+        }
+        return true;
+    }
+    void play(const std::string& note) {
+        auto it = chunks_.find(note);
+        if (it != chunks_.end()) Mix_PlayChannel(-1, it->second, 0);
+    }
+    ~RgbDemoAudio() {
+        if (!initialized_) return;
+        Mix_HaltChannel(-1);
+        for (auto& item : chunks_) Mix_FreeChunk(item.second);
+        Mix_CloseAudio();
+        SDL_QuitSubSystem(SDL_INIT_AUDIO);
+    }
+private:
+    bool initialized_ = false;
+    std::map<std::string, std::vector<int16_t>> buffers_;
+    std::map<std::string, Mix_Chunk*> chunks_;
+    static int noteToMidi(const std::string& note) {
+        static const std::map<std::string,int> blacks = {
+            {"BLACK_01",61},{"BLACK_02",63},{"BLACK_03",66},
+            {"BLACK_04",68},{"BLACK_05",70},{"BLACK_06",73},
+            {"BLACK_07",75},{"BLACK_08",78},{"BLACK_09",80},
+            {"BLACK_10",82}
+        };
+        auto it = blacks.find(note);
+        if (it != blacks.end()) return it->second;
+        if (note.size() < 2) return -1;
+        static const std::string names = "C D EF G A B";
+        int semitone = -1;
+        switch (note[0]) {
+            case 'C': semitone=0; break; case 'D': semitone=2; break;
+            case 'E': semitone=4; break; case 'F': semitone=5; break;
+            case 'G': semitone=7; break; case 'A': semitone=9; break;
+            case 'B': semitone=11; break;
+        }
+        if (semitone < 0 || note[1] < '0' || note[1] > '9') return -1;
+        return (note[1]-'0'+1)*12+semitone;
+    }
+    static std::vector<int16_t> makeTone(int midi) {
+        constexpr int rate=44100;
+        constexpr double pi=3.14159265358979323846;
+        constexpr double seconds=0.65;
+        const double freq=440.0*std::pow(2.0,(midi-69)/12.0);
+        const int samples=static_cast<int>(rate*seconds);
+        std::vector<int16_t> result(static_cast<size_t>(samples)*2);
+        for (int i=0;i<samples;++i) {
+            double t=static_cast<double>(i)/rate;
+            double env=(1.0-std::exp(-t*150.0))*std::exp(-t*5.5);
+            double v=std::sin(2*pi*freq*t)
+                    +0.30*std::sin(2*pi*freq*2*t)
+                    +0.12*std::sin(2*pi*freq*3*t);
+            int16_t sample=static_cast<int16_t>(std::max(-1.0,std::min(1.0,0.35*env*v))*32767);
+            result[2*i]=sample;
+            result[2*i+1]=sample;
+        }
+        return result;
+    }
+};
 
 int main() {
 
@@ -133,13 +229,15 @@ const cv::Rect imageBounds(0, 0, rectWidth, rectHeight);
     ConflictResolver conflictResolver;
     KeyStateManager stateManager(keys);
     std::vector<bool> active(keys.size(), false);
+    RgbDemoAudio audio;
+    if (!audio.init(keys)) std::cerr << "Audio indisponible : detection maintenue.\n";
     double lastDiagnosticTime = -1.0;
     int previousCandidate = -1;
     int candidateFrames = 0;
     constexpr int kSwitchConfirmationFrames = 4;
     constexpr int kMinBlobArea = 90;
 
-    std::cout << "RGB10.1 - filtrage anti-bruit et anti-basculement (mono)\n"
+    std::cout << "RGB10.2 - RGB10.1 + audio SDL2_mixer (mono)\n"
               << "C = tapis vide | S = image ArUco | Q = quitter\n";
 
     while (true) {
@@ -388,10 +486,11 @@ const double ratio = static_cast<double>(
                     event.keyIndex >= static_cast<int>(active.size())) continue;
                 if (event.type == KeyEventType::PRESS) {
                     active[event.keyIndex] = true;
-                    std::cout << "RGB10.1 PRESS " << event.note << "\n";
+                    audio.play(event.note);
+                    std::cout << "RGB10.2 PRESS " << event.note << "\n";
                 } else if (event.type == KeyEventType::RELEASE) {
                     active[event.keyIndex] = false;
-                    std::cout << "RGB10.1 RELEASE " << event.note << "\n";
+                    std::cout << "RGB10.2 RELEASE " << event.note << "\n";
                 }
             }
             cv::Mat detectionView = rectified.clone();
@@ -409,7 +508,7 @@ const double ratio = static_cast<double>(
             const double now = static_cast<double>(cv::getTickCount()) /
                                cv::getTickFrequency();
             if (lastDiagnosticTime < 0 || now - lastDiagnosticTime >= 1.0) {
-                std::cout << "RGB10.1 | BLACK_01=" << black01Ratio * 100.0
+                std::cout << "RGB10.2 | BLACK_01=" << black01Ratio * 100.0
                           << "% | BLACK_02=" << black02Ratio * 100.0
                           << "% | meilleure blanche=" << bestWhiteRatio * 100.0
                           << "% | meilleure noire=" << bestBlackRatio * 100.0
