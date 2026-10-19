@@ -171,3 +171,36 @@ target_link_libraries(aruco_module_test PRIVATE
     OpenNI2
     ${OpenCV_LIBS}
 )
+
+# ==========================================
+# Bodenklavier RGB - Webcam USB
+# ==========================================
+
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(RGB_DEPS REQUIRED IMPORTED_TARGET
+    opencv4
+    sdl2
+    SDL2_mixer
+)
+
+add_executable(bodenklavier_rgb
+    src_cpp/bodenklavier_rgb.cpp
+    src/piano/PianoLayout.cpp
+    src/processing/ConflictResolver.cpp
+    src/piano/KeyStateManager.cpp
+    src/piano/NoteMapper.cpp
+    src/audio/AudioEngine.cpp
+)
+
+target_include_directories(bodenklavier_rgb PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(bodenklavier_rgb PRIVATE
+    PkgConfig::RGB_DEPS
+)
+
+target_compile_features(bodenklavier_rgb PRIVATE cxx_std_17)
+
+target_compile_options(bodenklavier_rgb PRIVATE -O2)
