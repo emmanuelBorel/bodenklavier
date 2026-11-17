@@ -1,0 +1,10 @@
+%YAML:1.0
+---
+output_width: 1275
+output_height: 400
+marker_size_cm: 10.5
+corners:
+   - { id:2, local_x:-33.666667938232422, local_y:-8. }
+   - { id:3, local_x:20.047430038452148, local_y:-5.2490119934082031 }
+   - { id:0, local_x:11.009949684143066, local_y:2.9375662803649902 }
+   - { id:1, local_x:-7.8739275932312012, local_y:2.5635790824890137 }

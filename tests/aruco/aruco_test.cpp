@@ -57,6 +57,8 @@ int main() {
 
         cv::Mat bgr;
         cv::cvtColor(rgb, bgr, cv::COLOR_RGB2BGR);
+        // Corriger l'inversion horizontale du flux RGB
+        cv::flip(bgr, bgr, 1);
 
         std::vector<int> ids;
         std::vector<std::vector<cv::Point2f>> corners;
@@ -80,6 +82,11 @@ int main() {
         cv::imshow("Bodenklavier - ArUco Test", bgr);
 
         int key = cv::waitKey(1);
+
+        if (key == 's' || key == 'S') {
+        cv::imwrite("tests/aruco/capture_astra.png", bgr);
+        std::cout << "Image RGB enregistree !" << std::endl;
+        }
         if (key == 'q' || key == 'Q') {
             break;
         }

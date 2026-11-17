@@ -24,3 +24,15 @@ media/sounds_piano/
 
 # Build artifacts
 build/
+
+# Python virtual environments
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Local archives
+backups/
+
+# Temporary audit archives
+*_audit.zip

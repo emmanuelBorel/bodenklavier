@@ -1,0 +1,7 @@
+%YAML:1.0
+---
+image_width: 640
+image_height: 480
+rectified_width: 1275
+rectified_height: 400
+corners: [ 543., 383., 67., 349., 119., 270., 510., 292. ]
